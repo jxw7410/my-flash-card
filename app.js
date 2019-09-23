@@ -11,7 +11,11 @@ app.use(bodyParser.json());
 
 // Add routes to app
 const userRoutes = require('./routes/api/users');
+const topicRoutes = require('./routes/api/topics');
+// set up root file
+app.use('/', express.static('public'))
 app.use('/api/users', userRoutes);
+app.use('/api/topics', topicRoutes);
 
 
 //Set up jwt passport
