@@ -1,0 +1,12 @@
+.mainCtn {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.welcomeHdr{
+  font-size: 20px;
+  font-family: sans-serif;
+  width: fit-content;
+  margin: 0 auto;
+}
+
