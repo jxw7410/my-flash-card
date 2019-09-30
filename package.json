@@ -14,7 +14,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
+    "concurrently": "^4.1.2",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "nodemon": "^1.19.2",

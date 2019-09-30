@@ -16,6 +16,25 @@ const errorsParser = errors => {
   return parsedErrors;
 }
 
+
+// Method to sign jwt 
+const jwt = require('jsonwebtoken');
+const key = require('../config/keys');
+const KEY_EXP_TIME = 86400; // One day
+
+const signJWT = (payload, callback) => {
+  jwt.sign(
+    payload,
+    key.secretOrKey,
+    { expiresIn: KEY_EXP_TIME },
+    callback
+  )
+}
+
+
+
+
 module.exports = {
   errorsParser,
+  signJWT
 }
