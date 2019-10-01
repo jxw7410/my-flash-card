@@ -1,0 +1,27 @@
+.cardCtn{
+  position: relative;
+  perspective: 1000px;
+  transition: transform 1s linear;
+  transform-style: preserve-3d;
+  width: 500px;
+  height: 300px;
+}
+
+.card{
+  position: absolute;
+  border: 1px solid black;
+  width: inherit;
+  height: inherit;
+  backface-visibility: hidden;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.front{
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back{
+  transform: rotateY(180deg);
+}

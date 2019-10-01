@@ -6,7 +6,7 @@ const NavBar = props => {
   return (
     <div className={Styles.mainCtn}>
         <section>
-          <Link className={Styles.logo} to="/">MyFlashCardApp</Link>
+          <Link className={Styles.logo} to="/">MyFlashCards</Link>
         </section>
         <section>
           {

@@ -1,12 +1,26 @@
 .mainCtn {
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
   width: 100vw;
+  display: grid;
+  grid-template-rows: auto 50vh;
 }
 
+
 .welcomeHdr{
-  font-size: 20px;
+  font-size: 36px;
   font-family: sans-serif;
   width: fit-content;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 
+.prompt{
+  font-size: 20px;
+}
+
+.section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
