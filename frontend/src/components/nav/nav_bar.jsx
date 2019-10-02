@@ -3,6 +3,11 @@ import Styles from './nav_bar.module.css';
 import { Link } from 'react-router-dom';
 
 const NavBar = props => {
+  const logout = e => {
+    e.preventDefault();
+    props.logout();
+  }
+
   return (
     <div className={Styles.mainCtn}>
         <section>
@@ -11,7 +16,10 @@ const NavBar = props => {
         <section>
           {
             props.isLoggedIn ? 
-              <div>UserName</div> : AuthLinks()
+              <div>
+                UserName
+                <button type='button' onClick={logout}>Log Out</button>
+              </div> : AuthLinks()
           }
         </section>
     </div>

@@ -16,7 +16,11 @@ const Login = props => {
     It is used like ComponentDidMount, so the warning is ignorable.
   */
   useEffect(() => {
-    setState({ ...state, isMounted: true })
+    // This settimeout is needed due to race condition with the async of react re-render.
+    setTimeout( () => setState({ ...state, isMounted: true }), 0)
+    return () => {
+      props.clearErrors();
+    }
   }, [])
 
 
@@ -30,13 +34,28 @@ const Login = props => {
 
   const handleSumbit = e => {
     e.preventDefault();
+    const userData = {
+      email: state.email,
+      password: state.password
+    }
+
+    props.loginUser(userData);
   }
+
+  const parsedError = props.errors.map( error => {
+    if (error.LoginError){
+      return error.LoginError;
+    }
+  })
 
   return (
     <div className={`${Styles.sessionCtn}  ${state.isMounted ? Styles.sessionCtnMounted : ""}`}>
       <div className={Styles.loginCtn}>
         <section className={Styles.ctnHdr}>
           Login To Your Account
+        </section>
+        <section className={Styles.loginError}>
+          { parsedError }
         </section>
         <form
           onSubmit={handleSumbit}

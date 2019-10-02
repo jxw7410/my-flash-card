@@ -5,7 +5,7 @@ const errorsParser = errors => {
   errors.forEach(error => {
     for (let i = 0; i < error.message.length; i++) {
       if (error.message[i] === ':' && i !== (error.message.length - 1)) {
-        const key = error.message.slice(0, i + 1);
+        const key = error.message.slice(0, i);
         const value = error.message.slice(i + 1).trim();
         parsedErrors.push({ [key]: value })
         break;

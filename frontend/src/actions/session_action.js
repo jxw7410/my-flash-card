@@ -20,9 +20,10 @@ const receiveSessionErrorsAction = errors => ({
   errors
 })
 
-const clearSessionErrorsAction = {
+export const clearSessionErrorsAction = {
   type: CLEAR_SESSION_ERRORS
 }
+
 
 
 export const registerUser = userData =>  dispatch => {
@@ -48,7 +49,7 @@ export const loginUser = userData => dispatch => {
 export const logOutUser = () => dispatch => {
   localStorage.removeItem('jwt');
   SessionApi.setAuthToken(null);
-  dispatch(logOutUserAction());
+  dispatch(logOutUserAction);
 }
 
 

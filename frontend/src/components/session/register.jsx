@@ -16,7 +16,10 @@ const Register = props => {
     It is used like ComponentDidMount, so the warning is ignorable.
   */
   useEffect(() => {
-    setState({ ...state, isMounted: true })
+    setTimeout(() => setState({ ...state, isMounted: true }), 0)
+    return () => {
+      props.clearErrors();
+    }
   }, [])
 
 
@@ -39,6 +42,12 @@ const Register = props => {
     props.registerUser(userData);
   }
 
+  let parsedErrors = {};
+  props.errors.forEach( error => {
+    parsedErrors = Object.assign({}, parsedErrors, error)
+  });
+
+
   return (
     <div className={`${Styles.sessionCtn}  ${state.isMounted ? Styles.sessionCtnMounted : ""}`}>
       <div className={Styles.loginCtn}>
@@ -53,6 +62,7 @@ const Register = props => {
             label='Username'
             changeEvent={textChange('username')}
             text={state.username}
+            errorMessage={ parsedErrors.Username || ""} 
           />
 
           <SlideInput
@@ -60,6 +70,7 @@ const Register = props => {
             label='Email'
             changeEvent={textChange('email')}
             text={state.email}
+            errorMessage={ parsedErrors.Email || ""}
           />
 
 
@@ -68,6 +79,7 @@ const Register = props => {
             label='Password'
             changeEvent={textChange('password')}
             text={state.password}
+            errorMessage={ parsedErrors.Password || ""}
           />
 
           <button className={Styles.submitBtn} type='submit'>Sign Up</button>

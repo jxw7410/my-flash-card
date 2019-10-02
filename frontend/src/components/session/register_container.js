@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/session_action';
+import { registerUser, clearSessionErrorsAction } from '../../actions/session_action';
 import Register from './register';
 
 
@@ -11,6 +11,7 @@ const msp = state => ({
 
 const mdp = dispatch => ({
   registerUser: userData => dispatch( registerUser(userData)),
+  clearErrors: () => dispatch(clearSessionErrorsAction),
 });
 
 export default connect(msp, mdp)(Register);
