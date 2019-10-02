@@ -10,12 +10,12 @@ export const setAuthToken = token => {
 }
 
 
-export const registerUser = data => {
-  axios.post('http://localhost:5000/api/users/register', data);
-}
+export const registerUser = data => (
+  axios.post('api/users/register', data)
+)
 
-export const loginUser = data => {
-  axios.post('http://localhost:5000/api/users/login', data);
-}
+export const loginUser = data => (
+  axios.post('api/users/login', data)
+)
 
 

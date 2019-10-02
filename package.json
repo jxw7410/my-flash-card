@@ -9,7 +9,7 @@
     "server:debug": "nodemon --inspect app.js",
     "front-install": "cd frontend && npm install && cd ..",
     "frontend": "npm start --prefix frontend",
-    "server:development": "concurrently \"npm run server:debug\" \"npm run frontend \""
+    "server:dev": "concurrently \"npm run server:debug\" \"npm run frontend \""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

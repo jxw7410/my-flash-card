@@ -21,8 +21,8 @@ const NavBar = props => {
 
 const AuthLinks = () => (
   <>
-    <Link className={Styles.authLink} to='#'> Login </Link>
-    <Link className={Styles.authLink} to="#"> Sign Up </Link> 
+    <Link className={Styles.authLink} to='/login'> Login </Link>
+    <Link className={Styles.authLink} to="/register"> Sign Up </Link> 
   </>
 )
 

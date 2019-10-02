@@ -6,9 +6,7 @@ import SplashPage from './splash_page';
 const MainPage = ({ isLoggedIn }) => {
   return (
     <>
-      {
-        isLoggedIn ? <UserPage /> : <SplashPage />
-      }
+      { isLoggedIn ? <UserPage /> : <SplashPage /> }
     </>
   )
 }

@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: {
+        args: true, 
+        msg: 'Email: This Email already exists.'
+      },
       allowNull: false,
       validate: {
         isEmail: {
@@ -21,7 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    passwordDigest: DataTypes.STRING,
+    passwordDigest: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len:{
+        args: [8, 100],
+        msg: "Password: Minimum of 8 and Max of 32 characters for password."
+      }
+    }
   });
 
   User.associate = function (models) {
