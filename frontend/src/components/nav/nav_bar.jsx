@@ -8,6 +8,20 @@ const NavBar = props => {
     props.logout();
   }
 
+  const authLinks = () => (
+    <>
+      <Link className={Styles.authLink} to='/login'> Login </Link>
+      <Link className={Styles.authLink} to="/register"> Sign Up </Link>
+    </>
+  )
+
+  const loggedInLinks = () => (
+    <div className={Styles.loggedInLinks}>
+      <section className={Styles.username}>{props.user.username}</section>
+      <button className={Styles.logoutBtn} type='button' onClick={logout}>Log Out</button>
+    </div>
+  )
+
   return (
     <div className={Styles.mainCtn}>
         <section>
@@ -16,10 +30,7 @@ const NavBar = props => {
         <section>
           {
             props.isLoggedIn ? 
-              <div>
-                UserName
-                <button type='button' onClick={logout}>Log Out</button>
-              </div> : AuthLinks()
+             loggedInLinks() : authLinks()
           }
         </section>
     </div>
@@ -27,12 +38,6 @@ const NavBar = props => {
 }
 
 
-const AuthLinks = () => (
-  <>
-    <Link className={Styles.authLink} to='/login'> Login </Link>
-    <Link className={Styles.authLink} to="/register"> Sign Up </Link> 
-  </>
-)
 
 
 export default NavBar;

@@ -1,4 +1,4 @@
-.mainCtn{
+.mainCtn {
   height: 65px;
   width: 100%;
   background-color: rgb(52, 77, 165);
@@ -13,16 +13,42 @@
   margin: 0 30px;
 }
 
-.logo{
+.logo {
   color: white;
   text-decoration: none;
   margin: 0 10px;
 }
 
-.authLink{
+.authLink {
   color: white;
   margin: 0 10px;
   text-decoration: none;
 }
 
+.loggedInLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.username {
+  color: white;
+  margin: 0 10px;
+}
+
+.logoutBtn{
+  margin: 0 10px;
+  border: 2px solid white;
+  border-radius: 3px;
+  background: rgb(52, 77, 165);
+  color: white;
+  font-size: 16px;
+  height: 30px;
+  transition: color 0.2s linear, background 0.2s linear;
+}
+
+.logoutBtn:hover{
+  cursor: pointer;
+  color: rgb(52, 77, 165);
+  background: white;
+}

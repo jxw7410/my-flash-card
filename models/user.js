@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Associations
   User.associate = function (models) {
+      // Aliasing is important so the key can marked in postgres properly
       User.hasMany(models.Topic, {
         as: "Topics",
         foreignKey: "userId"

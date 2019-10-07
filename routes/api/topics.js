@@ -8,6 +8,7 @@ const { errorsParser } = require('../../utils/helper_methods');
 router.get('/', passport.authenticate('jwt', {session: false }), async (req, res)=>{
   // We don't have to find User because user has been found through passport authentication,
   // And has been escapsulated in req due to the pass.auth middleware.
+  debugger
   const topics = await Topic.findAll({
     where:{
       userId: req.user.id
@@ -23,9 +24,11 @@ router.get('/', passport.authenticate('jwt', {session: false }), async (req, res
 });
 
 router.post('/new', passport.authenticate('jwt', {session: false }), async (req, res) => {
+  debugger
   const newTopic = new Topic({
     name: req.body.name,
     type: req.body.type,
+    description: req.body.description,
     userId: req.user.id
   });
 

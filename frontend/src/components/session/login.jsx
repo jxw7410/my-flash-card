@@ -9,7 +9,6 @@ const Login = props => {
     password: "",
   })
 
-
   /*
     This will raise a warning because React thinks this would cause infinite rerendering.
     This would be the case if useEffect was used like componentDidUpdate, but in this case
@@ -32,6 +31,15 @@ const Login = props => {
     }
   }
 
+  const handleDemo = e => {
+    e.preventDefault();
+    const userData = {
+      email: 'demouser@gmail.com',
+      password: "password123"
+    }
+    props.loginUser(userData);
+  }
+
   const handleSumbit = e => {
     e.preventDefault();
     const userData = {
@@ -41,6 +49,7 @@ const Login = props => {
 
     props.loginUser(userData);
   }
+
 
   const parsedError = props.errors.map( error => {
     if (error.LoginError){
@@ -77,6 +86,13 @@ const Login = props => {
 
           <button className={Styles.submitBtn} type='submit'>Login</button>
         </form>
+        <div className={Styles.demoBtnCtn}>
+          No Account? Try the demo.
+          <button 
+            onClick={handleDemo}
+            className={Styles.demoBtn} 
+            type='button'> Demo </button>
+        </div>
       </div>
     </div>
   )

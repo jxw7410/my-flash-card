@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UserPage from './user_page';
+import UserPage from './user_page_container';
 import SplashPage from './splash_page';
 
 const MainPage = ({ isLoggedIn }) => {

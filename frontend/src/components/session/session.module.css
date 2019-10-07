@@ -43,8 +43,10 @@
 .loginError{
   height: 20px;
   padding: 3px;
-  width: fit-content;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: red;
   font-family: sans-serif;
 }
@@ -74,12 +76,39 @@
   background: white;
 }
 
-.submitBtn:focus{
-  outline: none;
-}
-
 .submitBtn:active{
   outline: none;
   color: white;
   background: rgb(52, 77, 165);
+}
+
+.demoBtnCtn{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+.demoBtn{
+  height: 40px;
+  width: 50%;
+  background:  green;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  border: 2px solid green;
+  transition: all 0.25s linear;
+}
+
+.demoBtn:hover{
+  cursor: pointer;
+  color: green;
+  background: white;
+}
+
+.demoBtn:active{
+  outline: none;
+  color: white;
+  background: green;
 }

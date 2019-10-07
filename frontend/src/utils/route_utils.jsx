@@ -14,8 +14,6 @@ const Auth = ({ component: Component, exact, path, loggedIn }) => (
   />
 )
 
-// May want a protected route as well to dry up code for paths that need authentication.
-
 const msp = state  => ({
   loggedIn: state.session.isAuthenticated
 });

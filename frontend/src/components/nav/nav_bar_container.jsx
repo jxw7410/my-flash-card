@@ -5,7 +5,8 @@ import { logOutUser } from '../../actions/session_action';
 
 
 const msp = state => ({
-  isLoggedIn: state.session.isAuthenticated
+  isLoggedIn: state.session.isAuthenticated,
+  user: state.session.user
 })
 
 const mdp = dispatch => ({
