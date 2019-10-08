@@ -10,30 +10,32 @@ const DemoCard = props => {
   // Check is componented is mounted in order to prevent setState of an unmounted component
   let isMounted = useRef(false);
 
+  // ComponentDidUpdate.
+  useEffect(() => {
+    if (isMounted.current) {
+      rotate(3000);
+    }
+  });
+
   // ComponentDidMount, and ComponentWillUnmount equivalent.
   // We need isMounted to makesure setState does not trigger when timeout happens.
   useEffect(() => {
     isMounted.current = true;
+    rotate(1500);
     return () => {
       isMounted.current = false;
     }
   }, [])
 
-  // ComponentDidUpdate.
-  useEffect(() => {
-    if (isMounted.current){
-      rotate();
-    }
-  });
 
-  const rotate = () => {
+  const rotate = timeout => {
     return setTimeout( () => {
       let rotateDeg = state.rotateDeg;
       rotateDeg += ( rotateDeg === 0 ? 180 : -180);
       if (isMounted.current) {
         setState({rotateDeg})
       }
-    }, 3000)
+    }, timeout)
   }
 
   // styles

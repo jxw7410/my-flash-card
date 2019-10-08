@@ -8,6 +8,12 @@ const UserPage = props => {
     props.fetchTopics();
   }, []);
 
+
+  const openModal = e => {
+    e.preventDefault();
+    props.openModal('CREATE_TOPIC');
+  }
+
   const topics = Object.keys(props.topics).map( topic_id => {
     return <li>{props.topics.topic_id.name}</li>
   })
@@ -15,9 +21,11 @@ const UserPage = props => {
 
   return (
     <div className={Styles.topicsCtn}>
-      <div className={Styles.newTopicIcon}>
+      <div 
+        className={Styles.newTopicIcon}
+        onClick={openModal}> 
         <i className={`fas fa-plus ${Styles.plusIcon}`}></i>
-        <div className={Styles.newTopicIconMsg}> 
+        <div className={Styles.newTopicIconMsg}>
           Add a new Topic 
           <div className={Styles.ntimTriangle} />
         </div>

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import UserPage from './user_page';
 import { createNewTopic, fetchUserTopics } from '../../actions/topics_action';
+import { openModal } from '../../actions/modal_action';
 
 
 
@@ -10,7 +11,8 @@ const msp  = state =>  ({
 
 const mdp = dispatch => ({
   fetchTopics: () => dispatch(fetchUserTopics()),
-  createNewTopic: data => dispatch(createNewTopic)
+  createNewTopic: data => dispatch(createNewTopic(data)),
+  openModal: modal => dispatch(openModal(modal))
 })
 
 
