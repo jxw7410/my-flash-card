@@ -12,13 +12,17 @@
 
 
 .newTopicModalCtn{
+  position: relative;
   background: white;
   border-radius: 10px;
-  height: 80vh;
-  width: 70vw;
+  min-height: 50vh;
+  width: 40vw;
   display: grid;
   grid-template-rows: 65px auto;
   overflow: hidden;
+  top: 0px;
+  opacity: 1;
+  transition: top 0.2s linear, opacity 0.2s linear;
 }
 
 .newTopicHdr{
@@ -31,5 +35,40 @@
   align-items: center;
 }
 
+.newTopicForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.newTopicTextArea{
+  resize: vertical;
+  width: calc(85% - 10px);
+  min-height: 200px;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 5px;
+  border-color: lightgray;
+}
 
 
+.createBtn{
+  margin: 10px;
+  height: 40px;
+  width: 100px;
+  background: green;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  border: 2px solid green;
+  border-radius: 5px;
+  transition: background 0.2s linear, color 0.2s linear;
+}
+
+.createBtn:hover{
+  cursor: pointer;
+  color: green;
+  background: white;
+}

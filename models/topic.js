@@ -3,13 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const Topic = sequelize.define('Topic', {
     name:{
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      allowNull: false
     },
     type: { 
       type: DataTypes.STRING,
-      allowNull: false, 
-      unique: true
+      allowNull: false
     },
     description: {
       type: DataTypes.TEXT,

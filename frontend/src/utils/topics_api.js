@@ -4,6 +4,6 @@ export const fetchUserTopics = () => (
   axios.get('api/topics')
 )
 
-export const createNewTopic = data => {
+export const createNewTopic = data => (
   axios.post('api/topics/new', data)
-}
+)

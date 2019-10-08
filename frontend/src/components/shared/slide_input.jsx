@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 import Styles from './slide_input.module.css';
 
+/*
+  How to use: 
+    <SlideInput 
+      type={type}
+      label={label}
+      onChange={ eventHandler }
+      text={ state.text}
+    />
+*/
 
 const SlideInput = ({ type, label, changeEvent, text, errorMessage = "" }) => {
   const [state, setState] = useState({
     isFocused: false,
-
   });
 
   const onFocus = bool => {

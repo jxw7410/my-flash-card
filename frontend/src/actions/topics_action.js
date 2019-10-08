@@ -20,10 +20,10 @@ const receiveTopicErrors = errors => ({
 })
 
 export const fetchUserTopics = () => dispatch => {
-  TopicsApi.fetchUserTopics().then(
+  return TopicsApi.fetchUserTopics().then(
     topics => {
-      debugger
-      dispatch(receiveUserTopics(topics));
+      dispatch(receiveUserTopics(topics.data));
+      return Promise.resolve()
     },
     err => {
       dispatch(receiveTopicErrors(err));
@@ -32,9 +32,10 @@ export const fetchUserTopics = () => dispatch => {
 }
 
 export const createNewTopic = data => dispatch => {
-  TopicsApi.createNewTopic(data).then(
+  return TopicsApi.createNewTopic(data).then(
     topic => {
-      dispatch(receiveCreatedTopic(topic))
+      dispatch(receiveCreatedTopic(topic.data))
+      return Promise.resolve()
     },
     err => {
       dispatch(receiveTopicErrors(err));

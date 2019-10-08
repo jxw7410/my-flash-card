@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import UserPage from './user_page';
 import { createNewTopic, fetchUserTopics } from '../../actions/topics_action';
-import { openModal } from '../../actions/modal_action';
+import { openModal, closeModal } from '../../actions/modal_action';
 
 
 

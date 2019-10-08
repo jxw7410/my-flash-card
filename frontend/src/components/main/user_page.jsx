@@ -14,8 +14,8 @@ const UserPage = props => {
     props.openModal('CREATE_TOPIC');
   }
 
-  const topics = Object.keys(props.topics).map( topic_id => {
-    return <li>{props.topics.topic_id.name}</li>
+  const topics = Object.keys(props.topics).map( topicId => {
+    return <li key={topicId}>{props.topics[topicId].name}</li>
   })
 
 
@@ -33,7 +33,8 @@ const UserPage = props => {
 
       {
         topics.length ?
-          <ul>{topics}</ul> : <div className={Styles.noTopics}>Looks like you have no topics.</div>
+          <ul>{topics}</ul> : 
+          <div className={Styles.noTopics}>Looks like you have no topics.</div>
       }
     </div>
   )
