@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import Styles from './user_page.module.css'
+import Styles from './user_page.module.css';
+import TopicCard from '../card/topic_card';
 
 const UserPage = props => {
 
@@ -14,8 +15,13 @@ const UserPage = props => {
     props.openModal('CREATE_TOPIC');
   }
 
+
+  /* 
+    Topics is nested as: 
+  */
+  
   const topics = Object.keys(props.topics).map( topicId => {
-    return <li key={topicId}>{props.topics[topicId].name}</li>
+    return <TopicCard key={topicId} topic={props.topics[topicId]} />
   })
 
 
@@ -33,7 +39,9 @@ const UserPage = props => {
 
       {
         topics.length ?
-          <ul>{topics}</ul> : 
+          <ul className={Styles.topicCardCtn}>
+            {topics}
+          </ul> : 
           <div className={Styles.noTopics}>Looks like you have no topics.</div>
       }
     </div>
