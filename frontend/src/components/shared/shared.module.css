@@ -1,0 +1,81 @@
+.container{
+  display: grid;
+  grid-template-rows: auto 20px;
+  font-family: sans-serif;
+  width: 85%;
+}
+
+
+.labelCtn{
+  position: relative;
+}
+
+.label{
+  position: absolute;
+  top: 12.5px;
+  left: 5px;
+  font-size: 20px;
+  color: gray;
+  transition: all 0.2s linear;
+}
+
+
+.input{
+  padding: 5px;
+  height: 30px;
+  width: calc(100% - 10px);
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  font-size: 20px;
+}
+
+.error{
+  padding: 5px;
+  font-size: 14px;
+  color: red;
+}
+
+
+.descriptionBoxCtn{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.descLabel{
+  position: absolute;
+  top: 13px;
+  left: 5.5px;
+  color: gray;
+  font-size: 20px;
+  transition: all 0.2s linear;
+}
+
+
+.textArea{
+  width: calc(100% - 10px);
+  padding: 10px 5px;
+  font-size: 20px;
+  border-radius: 3px;
+  border-color: gray;
+  height: 100px;
+  resize: none;
+}
+
+.wordCountSpan{
+  position: absolute;
+  font-family: sans-serif;
+  bottom: 5px;
+  right: 5px;
+  color:  rgb(77, 135, 225);
+}
+
+
+.labelFocused{
+  top: -14px;
+  left: 0px;
+  font-size: 12px;
+  color: rgb(77, 135, 225);
+}

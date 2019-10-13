@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import Styles from './modal.module.css'
 import SlideInput from '../shared/slide_input';
+import DescriptionBox from '../shared/desciption_box';
 
 const NewTopicModal = props => {
 
@@ -53,26 +54,26 @@ const NewTopicModal = props => {
         <form 
           onSubmit={createNewTopic}
           className={Styles.newTopicForm}>
+          <br/>
           <SlideInput 
             type='text'
             label="Topic Name"
             changeEvent={textChangeEvent('topicName')}
             text = {state.topicName}
           />
-          
+          <br/>
           <SlideInput
             type='text'
             label="Topic Type"
             changeEvent={textChangeEvent('topicType')}
             text={state.topicType}
           />
-
-          <textarea 
-            className={Styles.newTopicTextArea} 
-            placeholder="Describe this topic..."
-            onChange={textChangeEvent("topicDescription")}
+          <br/>
+          <DescriptionBox 
+            label="Description"
+            onChange={textChangeEvent('topicDescription')}
             value={state.topicDescription}
-            />
+          />
 
           <button 
             className={Styles.createBtn} 

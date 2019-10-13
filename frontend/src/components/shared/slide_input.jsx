@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Styles from './slide_input.module.css';
+import Styles from './shared.module.css';
 
 /*
   How to use: 

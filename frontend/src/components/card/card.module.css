@@ -111,6 +111,7 @@
 .topicCardDescSpan{
   font-size: 20px;
   max-width: calc(275px * .9);
+  word-break: break-word;
 }
 
 .topicCard:hover .topicCardDesc{

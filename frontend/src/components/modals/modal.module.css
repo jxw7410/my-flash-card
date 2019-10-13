@@ -43,17 +43,6 @@
   padding: 20px 0;
 }
 
-.newTopicTextArea{
-  resize: vertical;
-  width: calc(85% - 10px);
-  min-height: 200px;
-  border-radius: 3px;
-  font-size: 16px;
-  padding: 5px;
-  border-color: lightgray;
-}
-
-
 .createBtn{
   margin: 10px;
   height: 40px;
