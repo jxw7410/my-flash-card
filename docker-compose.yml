@@ -1,0 +1,49 @@
+# Development dockerfile
+
+version: '3.7'
+
+volumes:
+  db-data:
+
+services: 
+
+  psql:
+    image: postgres:latest
+    volumes:
+       - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "flashcard_app_development"
+
+
+  node_server: 
+    container_name: app_server_dev
+    build: 
+      context: . 
+      dockerfile: Dockerfile 
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      NODE_ENV: development
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - psql
+    command: npm run server:debug
+  
+    
+  frontend: 
+    container_name: app_client_dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    depends_on:
+      - node_server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+    command: npm start
