@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     Also defined like this for hoisting.
   */
   async function isUnique(email, next) {
-    try {
+    try {   
       const user = await User.findOne({ where: { email } });
       if (user) {
         return next("Email: This Email is already in used.");

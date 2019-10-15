@@ -16,20 +16,21 @@ const topicRoutes = require('./routes/api/topics');
 app.use('/api/users', userRoutes);
 app.use('/api/topics', topicRoutes);
 
-
 //Set up jwt passport
 const passport = require('passport');
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-const server = async () => {
+const serverInit = async () => {
   const port = process.env.PORT || 5000;
-  await app.listen(port, () => console.log(`Server is running on port ${port}`));
+  await app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 }
 
 // Add {force: true} as argument for sync to drop database
 db.sequelize.sync().then(() => {
   console.log('database synced');
-  server();
+  serverInit();
 })
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Styles from './user_page.module.css';
-import TopicCard from '../card/topic_card';
+import TopicCard from '../card/topic_card_container';
 
 const UserPage = props => {
 
@@ -12,16 +12,24 @@ const UserPage = props => {
 
   const openModal = e => {
     e.preventDefault();
-    props.openModal('CREATE_TOPIC');
+    props.openModal({ type: 'CREATE_TOPIC'});
   }
 
 
   /* 
     Topics is nested as: 
+    {
+      id: {
+        name:
+        type:
+        description:
+      },
+      ...
+    }
   */
   
   const topics = Object.keys(props.topics).map( topicId => {
-    return <TopicCard key={topicId} topic={props.topics[topicId]} />
+    return <TopicCard key={topicId} topic={ Object.assign( {}, {topicId }, props.topics[topicId]) } />
   })
 
 

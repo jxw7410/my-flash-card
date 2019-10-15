@@ -7,7 +7,7 @@ module.exports = {
     username: "postgres",
     password: "postgres",
     database: "flashcard_app_development",
-    host: "psql",  //Change to psql for docker to work
+    host: "127.0.0.1",  //Change to psql for docker to work, 127.0.0.1 for localhost
     port : "5432",
     dialect: "postgres",
     operatorsAliases: Sequelize.Op,

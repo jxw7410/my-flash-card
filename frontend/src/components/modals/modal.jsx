@@ -1,6 +1,8 @@
 import React, {Fragment} from 'react';
 import Styles from './modal.module.css';
-import NewTopicModal from './new_topic_modal_container';
+import TopicModal from './topic_modal_container';
+import DeleteTopicModal from './delete_topic_modal_container';
+
 
 const Modal = ({modal, closeModal}) => {
   if (!modal){
@@ -8,10 +10,15 @@ const Modal = ({modal, closeModal}) => {
   }
 
   let component;
-
-  switch(modal) {
+  switch(modal.type) {
     case 'CREATE_TOPIC':
-      component = <NewTopicModal />
+      component = <TopicModal topic={{}}/>
+      break;
+    case 'EDIT_TOPIC':
+      component = <TopicModal topic={modal.topic}/>
+      break;
+    case 'DELETE_TOPIC':
+      component = <DeleteTopicModal topic={modal.topic} />
       break;
     default:
       return null

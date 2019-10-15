@@ -6,9 +6,10 @@ import DescriptionBox from '../shared/desciption_box';
 const NewTopicModal = props => {
 
   const [state, setState] = useState({
-    topicName: "",
-    topicType: "",
-    topicDescription: "",
+    topicName: props.topic.name || "",
+    topicType: props.topic.type || "",
+    topicDescription: props.topic.description || "",
+    isEdit: props.topic.name,
     isMounted: false,
   });
 
@@ -19,6 +20,10 @@ const NewTopicModal = props => {
         isMounted: true
       })
     }, 0);
+
+    return () => {
+      props.clearErrors();
+    }
   }, [])
 
 
@@ -44,15 +49,35 @@ const NewTopicModal = props => {
       });
   }
 
+  const editTopic = e => {
+    e.preventDefault();
+    const data = {
+      topicId: props.topic.topicId,
+      name: state.topicName,
+      type: state.topicType,
+      description: state.topicDescription
+    }
+
+    props.editTopic(data)
+      .then(() => {
+        props.closeModal();
+      })
+  }
+
+  let parsedErrors = {};
+  for(const error of props.errors) {
+    parsedErrors = Object.assign({}, parsedErrors, error);
+  }
+
   return (
     <div 
       onClick ={ e => e.stopPropagation() }
       style={state.isMounted ? null : { top: '-20px', opacity: 0 }}
       className={Styles.newTopicModalCtn}>
-      <section className={Styles.newTopicHdr}>New Topic</section>
+      <section className={Styles.newTopicHdr}>{ state.isEdit ? "Edit Topic" : "New Topic" }</section>
       <section>
         <form 
-          onSubmit={createNewTopic}
+          onSubmit={ state.isEdit ? editTopic : createNewTopic }
           className={Styles.newTopicForm}>
           <br/>
           <SlideInput 
@@ -60,6 +85,7 @@ const NewTopicModal = props => {
             label="Topic Name"
             changeEvent={textChangeEvent('topicName')}
             text = {state.topicName}
+            errorMessage={ parsedErrors.Name || "" }
           />
           <br/>
           <SlideInput
@@ -67,6 +93,7 @@ const NewTopicModal = props => {
             label="Topic Type"
             changeEvent={textChangeEvent('topicType')}
             text={state.topicType}
+            errorMessage={ parsedErrors.Type || ""}
           />
           <br/>
           <DescriptionBox 
@@ -77,7 +104,7 @@ const NewTopicModal = props => {
 
           <button 
             className={Styles.createBtn} 
-            type='submit'>Create</button>
+            type='submit'>{state.isEdit ? "Edit" : "Create"}</button>
         </form>
       </section>
     </div>

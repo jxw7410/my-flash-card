@@ -59,6 +59,54 @@
   z-index: 3;
 }
 
+.topicCardOptions{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 7px;
+  top: 20px;
+  font-size: 20px;
+}
+
+.topicCardOptions:focus{
+  outline: none;
+}
+
+
+.topicCardOptions:hover .fas{
+  color: white;
+}
+
+.topicCardDropDown{
+  position: absolute;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px gray;
+  overflow: hidden;
+  top: 25px;
+  left: 50px;
+  z-index: 10;
+  font-size: 14px;
+  transition: left 0.3s linear;
+}
+
+.topicCardDropDownActive{
+  left: -50px;
+}
+
+.topicCardDropDown > li {
+  text-align: center;
+  padding: 5px 10px;
+}
+
+.topicCardDropDown > li:hover{
+  background: lightgray;
+}
+
+.topicCardDropDown > li:not(:last-child){
+  border-bottom: 1px solid gray;
+}
 
 .topicCardHdr{
   display: flex;
@@ -69,6 +117,13 @@
   color: white;
   background: rgb(52, 77, 165);
   width: 100%;
+}
+
+.topicCardHdrSpan{
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .topicCardName{

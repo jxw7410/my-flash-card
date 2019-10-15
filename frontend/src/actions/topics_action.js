@@ -1,16 +1,18 @@
 import * as TopicsApi from '../utils/topics_api';
 
-export const RECEIVE_USER_TOPICS = 'RECEIVE_USER_TOPICS';
-export const RECEIVE_CREATED_TOPIC = 'RECIEVE_CREATED_TOPIC';
+export const RECEIVE_TOPICS = 'RECEIVE_TOPICS';
+export const RECEIVE_TOPIC = 'RECIEVE_TOPIC';
 export const RECEIVE_TOPIC_ERRORS = 'RECEIVE_TOPIC_ERRORS';
+export const DELETE_TOPIC = 'DELETE_TOPIC';
+export const CLEAR_TOPIC_ERRORS = 'CLEAR_TOPIC_ERRORS';
 
-const receiveUserTopics = topics => ({
-  type: RECEIVE_USER_TOPICS,
-  topics 
+const receiveTopics = topics => ({
+  type: RECEIVE_TOPICS,
+  topics
 })
 
-const receiveCreatedTopic = topic => ({
-  type: RECEIVE_CREATED_TOPIC,
+const receiveTopic = topic => ({
+  type: RECEIVE_TOPIC,
   topic
 })
 
@@ -19,14 +21,24 @@ const receiveTopicErrors = errors => ({
   errors
 })
 
+const deleteTopicAction = topic => ({
+  type: DELETE_TOPIC,
+  topic
+})
+
+export const clearTopicErrors = () => ({
+  type: CLEAR_TOPIC_ERRORS
+})
+
 export const fetchUserTopics = () => dispatch => {
   return TopicsApi.fetchUserTopics().then(
     topics => {
-      dispatch(receiveUserTopics(topics.data));
-      return Promise.resolve()
+      dispatch(receiveTopics(topics.data));
+      return Promise.resolve();
     },
     err => {
-      dispatch(receiveTopicErrors(err));
+      dispatch(receiveTopicErrors(err.response.data));
+      return Promise.reject();
     }
   )
 }
@@ -34,13 +46,39 @@ export const fetchUserTopics = () => dispatch => {
 export const createNewTopic = data => dispatch => {
   return TopicsApi.createNewTopic(data).then(
     topic => {
-      dispatch(receiveCreatedTopic(topic.data))
-      return Promise.resolve()
+      dispatch(receiveTopic(topic.data));
+      return Promise.resolve();
     },
     err => {
-      dispatch(receiveTopicErrors(err));
+      dispatch(receiveTopicErrors(err.response.data));
+      return Promise.reject();
+    }
+  )
+}
+
+export const editTopic = data => dispatch => {
+  return TopicsApi.editTopic(data).then(
+    topic => {
+      dispatch(receiveTopic(topic.data));
+      return Promise.resolve();
+    },
+    err => {
+      dispatch(receiveTopicErrors(err.response.data));
+      return Promise.reject();
     }
   )
 }
 
 
+
+export const deleteTopic = data => dispatch => {
+  return TopicsApi.deleteTopic(data).then(topic => {
+      dispatch(deleteTopicAction(topic.data));
+      return Promise.resolve();
+    },
+    err => {
+      dispatch(receiveTopicErrors(err.response.data));
+      return Promise.reject();
+    }
+  )
+}

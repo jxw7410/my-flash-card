@@ -3,14 +3,32 @@ module.exports = (sequelize, DataTypes) => {
   const Topic = sequelize.define('Topic', {
     name:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Name: Topic name cannot be empty."
+        }
+      }
     },
     type: { 
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Type: Topic Type cannot be empty."
+        }
+      }
     },
     description: {
       type: DataTypes.TEXT,
+      validate: {
+        len: {
+          args: [0, 160],
+          msg: "Description: There is a max of 160 characters."
+        }
+      }
     }
   });
 
@@ -25,6 +43,18 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
+
+  // Class Methods
+
+  Topic.prototype.parsedData = function(){
+    return {
+      [this.id] : {
+        name: this.name,
+        type: this.type,
+        description: this.description
+      }
+    }
+  }
 
   return Topic;
 };
