@@ -12,9 +12,11 @@ app.use(bodyParser.json());
 // Add routes to app
 const userRoutes = require('./routes/api/users');
 const topicRoutes = require('./routes/api/topics');
+const questionRoutes = require('./routes/api/questions');
 
 app.use('/api/users', userRoutes);
 app.use('/api/topics', topicRoutes);
+app.use('/api/topics/:topic_id/question', questionRoutes);
 
 //Set up jwt passport
 const passport = require('passport');
@@ -33,4 +35,3 @@ db.sequelize.sync().then(() => {
   console.log('database synced');
   serverInit();
 })
-

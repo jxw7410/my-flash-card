@@ -10,7 +10,8 @@ let sequelize = new Sequelize(config.database, config.username, config.password,
 // Fill this up for models to be used
 const db = {
   User: sequelize.import('./user.js'),
-  Topic: sequelize.import('./topic.js')
+  Topic: sequelize.import('./topic.js'),
+  Question: sequelize.import('./question.js'),
 };
 
 

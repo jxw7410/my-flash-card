@@ -41,6 +41,15 @@ module.exports = (sequelize, DataTypes) => {
       as: "User",
       foreignKey: "userId"
     });
+
+
+    Topic.hasMany(models.Question, {
+      as: "Questions",
+      foreignKey: "topicId",
+      onDelete: "cascade",
+      hooks: true
+    });
+
   };
 
 

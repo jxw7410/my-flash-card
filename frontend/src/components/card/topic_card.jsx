@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import {withRouter} from 'react-router-dom';
 import Styles from './card.module.css';
 
 
-const TopicCard = ({ topic, openModal }) => {
+const TopicCard = props => {
 
   const [state, setState] = useState({
     dropDown: false,
@@ -11,6 +12,7 @@ const TopicCard = ({ topic, openModal }) => {
 
   const setDropDown = bool => {
     return e => {
+      e.stopPropagation();
       e.preventDefault();
       setState({
         ...state,
@@ -21,23 +23,29 @@ const TopicCard = ({ topic, openModal }) => {
 
   const editTopic = e => {
     e.preventDefault();
-    openModal({
+    props.openModal({
       type: 'EDIT_TOPIC',
-      topic
+      topic: props.topic
     })
   }
 
   const deleteTopic = e => {
     e.preventDefault();
-    openModal({
+    props.openModal({
       type: 'DELETE_TOPIC',
-      topic
+      topic: props.topic
     })
+  }
+
+  const redirectToQuestion = e => {
+    e.preventDefault();
+    props.history.push(`/topic/${props.topic.topicId}/questions`);
   }
 
   return (
     <li className={Styles.topicCardCtn}>
-      <div className={Styles.topicCard}>
+      <div className={Styles.topicCard}
+        onClick={redirectToQuestion}>
         <div className={Styles.topicCardOptions}
           tabIndex='0'
           onClick={state.dropDown ? setDropDown(false) : setDropDown(true)}
@@ -52,17 +60,17 @@ const TopicCard = ({ topic, openModal }) => {
         </div>
         <h1 className={Styles.topicCardHdr}>
           <span className={Styles.topicCardHdrSpan}>
-            {topic.type}
+            {props.topic.type}
           </span>
         </h1>
-        <div className={Styles.topicCardName}>{topic.name}</div>
+        <div className={Styles.topicCardName}>{props.topic.name}</div>
         <div className={Styles.topicCardDesc}>
           <h1 className={Styles.topicCardDescHdr}>Description</h1>
-          <span className={Styles.topicCardDescSpan}>{topic.description}</span>
+          <span className={Styles.topicCardDescSpan}>{props.topic.description}</span>
         </div>
       </div>
     </li>
   )
 }
 
-export default TopicCard;
+export default withRouter(TopicCard);

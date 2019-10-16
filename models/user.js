@@ -68,7 +68,9 @@ module.exports = (sequelize, DataTypes) => {
       // Aliasing is important so the key can marked in postgres properly
       User.hasMany(models.Topic, {
         as: "Topics",
-        foreignKey: "userId"
+        foreignKey: "userId",
+        onDelete: 'cascade',
+        hooks: true
       });
     };
 
