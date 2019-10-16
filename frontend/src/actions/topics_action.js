@@ -30,6 +30,20 @@ export const clearTopicErrors = () => ({
   type: CLEAR_TOPIC_ERRORS
 })
 
+
+export const fetchTopic = topicId => dispatch => {
+  return TopicsApi.fetchTopic(topicId).then(
+    topic => {
+      dispatch(receiveTopic(topic.data));
+      return Promise.resolve();
+    },
+    err => {
+      dispatch(receiveTopicErrors(err.response.data));
+      return Promise.reject();
+    }
+  )
+}
+
 export const fetchUserTopics = () => dispatch => {
   return TopicsApi.fetchUserTopics().then(
     topics => {

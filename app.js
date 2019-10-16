@@ -1,3 +1,7 @@
+// Allows for usage .env to load environment variables.
+const dotenv = require('dotenv');
+dotenv.config();
+
 // Server Configs
 const express = require('express');
 const app = express();

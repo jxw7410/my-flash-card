@@ -5,7 +5,9 @@ const { Topic } = require('../../models/sequelize');
 
 const { errorsParser } = require('../../utils/helper_methods');
 
+// Should restify these in the future when possible.
 
+// Index
 router.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
   // We don't have to find User because user has been found through passport authentication,
   // And has been escapsulated in req due to the pass.auth middleware.
@@ -24,6 +26,17 @@ router.get('/', passport.authenticate('jwt', { session: false }), async (req, re
 
 });
 
+// Show 
+router.get('/:id', passport.authenticate('jwt', {session: false}), async(req,res) => {
+  const topic = await Topic.findByPk(req.params.id);
+  if (topic) {
+    res.json(topic.parsedData())
+  } else {
+    res.status(404).json({Error: "Topic Not found"})
+  }
+})
+
+// Create
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const newTopic = new Topic({
     name: req.body.name,
@@ -40,7 +53,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
   }
 });
 
-
+// Update
 router.put('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const topic = await Topic.findByPk(req.params.id);
   try {
@@ -56,6 +69,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), async (req,
   }
 });
 
+//Delete
 router.delete('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     await Topic.destroy({

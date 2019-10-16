@@ -10,20 +10,45 @@
 }
 
 .mainCtn > section {
-  margin: 0 30px;
+  margin: 0 40px;
+}
+
+.mainCtn > section:last-child{
+  display: flex;
+  align-items: center;
 }
 
 .logo {
   color: white;
   text-decoration: none;
   margin: 0 10px;
+  font-size: 30px;
+}
+
+.authLinkCtn {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
 }
 
 .authLink {
   color: white;
-  margin: 0 10px;
   text-decoration: none;
 }
+
+.authLinkExpander{
+  margin-top: 2px;
+  width: 0px;
+  height: 2px;
+  background: white;
+  transition: width 0.3s linear;
+}
+
+.authLink:hover + .authLinkExpander {
+  width: 100%;
+}
+
+
 
 .loggedInLinks {
   display: flex;

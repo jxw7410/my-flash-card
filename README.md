@@ -9,6 +9,7 @@
 * Run docker-compose up psql
 * Run docker build node_server
 * Run docker exec -it node_server node_server npx sequelize db:create
+* Run docker exec -it node_server node_server npx sequelize db:migrate
 * Run docker-compose up node_server
 * Go to the frontend folder, and check that the proxy in the package.json is set to http://node_server:5000
 * Run docker-compose build frontend

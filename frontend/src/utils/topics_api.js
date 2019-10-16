@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export const fetchTopic = topicId => (
+  axios.get(`api/topics/${topicId}`)
+)
+
 export const fetchUserTopics = () => (
   axios.get('api/topics')
 )

@@ -10,8 +10,14 @@ const NavBar = props => {
 
   const authLinks = () => (
     <>
-      <Link className={Styles.authLink} to='/login'> Login </Link>
-      <Link className={Styles.authLink} to="/register"> Sign Up </Link>
+      <section className={Styles.authLinkCtn}>
+        <Link className={Styles.authLink}to='/login'> Login </Link>
+        <div className={Styles.authLinkExpander}/>
+      </section>
+      <section className={Styles.authLinkCtn}>
+        <Link className={Styles.authLink} to="/register"> Sign Up </Link>
+        <div className={Styles.authLinkExpander} />
+      </section>
     </>
   )
 

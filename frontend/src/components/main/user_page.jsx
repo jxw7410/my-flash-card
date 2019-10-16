@@ -29,7 +29,7 @@ const UserPage = props => {
   */
   
   const topics = Object.keys(props.topics).map( topicId => {
-    return <TopicCard key={topicId} topic={ Object.assign( {}, {topicId }, props.topics[topicId]) } />
+    return <TopicCard key={topicId} topic={ props.topics[topicId] } />
   })
 
 

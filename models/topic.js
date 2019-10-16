@@ -58,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
   Topic.prototype.parsedData = function(){
     return {
       [this.id] : {
+        topicId: this.id,
         name: this.name,
         type: this.type,
         description: this.description
