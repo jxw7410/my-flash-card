@@ -48,18 +48,85 @@
   width: 100%;
 }
 
-
-
-.loggedInLinks {
+.loggedInLinks, .loggedInLinks > * {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.loggedInLinks > section:focus{
+  outline: none;
+}
+
 .username {
+  position: relative;
   color: white;
   margin: 0 10px;
+  height: 40px;
+  width: 40px;
 }
+
+.iconCtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(52, 77, 165);
+  border: 1px solid rgb(52, 77, 165);
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.1s linear;
+}
+
+
+.username > .iconCtn:hover{
+  cursor: pointer;
+}
+
+.username > .iconCtn:active{
+  height: 36px;
+  width: 36px;
+  font-size: 18px;
+}
+
+.userDropdown{
+  display: none;
+  position: absolute;
+  width: 250px;
+  z-index: 10;
+  right: 0;
+  top: 50px;
+  background: white;
+  color: black;
+  box-shadow: 0px 0px 10px grey;
+}
+
+
+.userDropdown > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+
+.userDropdown > ul > li {
+  width: 100%;
+}
+
+.userDropdown > ul > li:first-child{
+  display: grid;
+  grid-template-columns: 75px auto;
+}
+
+.userDropdown > ul > li:first-child > section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .logoutBtn{
   margin: 0 10px;

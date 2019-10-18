@@ -96,14 +96,16 @@
   justify-content: center;
   align-items: center;
   right: 7px;
-  top: 20px;
-  font-size: 20px;
+  top: 14px;
 }
 
 .topicCardOptions:focus{
   outline: none;
 }
 
+.topicCardOptions > i {
+  font-size: 30px;
+}
 
 .topicCardOptions:hover .fas{
   color: white;
@@ -115,7 +117,7 @@
   border-radius: 5px;
   box-shadow: 5px 5px 5px gray;
   overflow: hidden;
-  top: 25px;
+  top: 32px;
   left: 50px;
   z-index: 10;
   font-size: 14px;

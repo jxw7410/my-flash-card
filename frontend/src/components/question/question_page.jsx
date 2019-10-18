@@ -23,9 +23,6 @@ const QuestionPage = props => {
           <section className={`${Styles.sideNavSec1} ${Styles.sideNavSec2}`}>
             {props.topic.name}
           </section>
-          <section className={Styles.sideNavSec3}>
-            <div>{props.topic.description}</div>
-          </section>
         </div>
       </section>
       <section>
