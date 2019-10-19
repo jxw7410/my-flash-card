@@ -4,7 +4,7 @@ import { closeModal } from '../../actions/modal_action';
 
 
 const msp = state => ({
-  modal: state.ui.modal,
+  modalData: state.ui.modalData,
 })
 
 

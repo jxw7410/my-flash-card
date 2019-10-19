@@ -25,14 +25,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-
-
   Question.associate = function(models) {
     Question.belongsTo(models.Topic, {
       as: 'Topic',
       foreignKey: "topicId"
     })
   };
+
+
+  Question.prototype.parseData = function(){
+    return {
+      [this.id]: {
+        questionId: this.id,
+        question: this.question,
+        answer: this.answer
+      }
+    }
+  }
 
   return Question;
 }

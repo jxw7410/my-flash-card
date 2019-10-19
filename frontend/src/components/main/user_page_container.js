@@ -12,7 +12,7 @@ const msp  = state =>  ({
 const mdp = dispatch => ({
   fetchTopics: () => dispatch(fetchUserTopics()),
   createNewTopic: data => dispatch(createNewTopic(data)),
-  openModal: modal => dispatch(openModal(modal))
+  openModal: modalData => dispatch(openModal(modalData))
 })
 
 

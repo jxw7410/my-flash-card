@@ -20,7 +20,7 @@ const questionRoutes = require('./routes/api/questions');
 
 app.use('/api/users', userRoutes);
 app.use('/api/topics', topicRoutes);
-app.use('/api/topics/:topic_id/question', questionRoutes);
+app.use('/api/topics/:topicId/questions', questionRoutes);
 
 //Set up jwt passport
 const passport = require('passport');

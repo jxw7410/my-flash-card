@@ -3,18 +3,41 @@ const express = require('express');
 const router = express.Router({mergeParams: true}); 
 const passport = require('passport');
 const { Question } = require('../../models/sequelize');
-
+const { errorsParser } = require('../../utils/helper_methods');
 
 // Get 
 router.get('/', passport.authenticate('jwt', {session: false}), async (req, res) => {
+  const questions = await Question.findAll({
+    where: {
+      topicId: req.params.topicId
+    }
+  });
 
+
+  if (questions.length) {
+    const parsedQuestions = questions.map( question => question.parseData())
+    res.json(Object.assign( {}, ...parsedQuestions));
+  } else {
+    res.status(404).json([{ Questions: 'No Questions where found'}]);
+  }
 });
 
 
 
 //Post 
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  
+  const newQuestion = new Question({
+    question: req.body.question,
+    answer: req.body.answer,
+    topicId: req.params.topicId
+  })
+
+  try {
+    await newQuestion.save();
+    res.json(newQuestion.parseData());
+  } catch(ValidationError) {
+    res.status(422).json(errorsParser(ValidationError));
+  }
 });
 
 

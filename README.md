@@ -3,7 +3,7 @@
 
 
 # Docker Set up
-### Disclaimer: I'm not an expect at docker, so no fancy entry .sh files for easy set up. It's a work in progress though.
+### Disclaimer: I'm not an expert at docker, so no fancy entry .sh files for easy set up. It's a work in progress though.
 * Make sure you have docker installed
 * Make sure config/config.js host of developent is set to 'psql'
 * Run docker-compose up psql

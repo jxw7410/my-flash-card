@@ -21,7 +21,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), async (req, re
     const parsedTopics = topics.map(topic => topic.parsedData());
     res.json(Object.assign({}, ...parsedTopics))
   } else {
-    res.status(404).json({ Topics: 'No Topics where found for current User' })
+    res.status(404).json([{ Topics: 'No Topics where found for current User' }])
   }
 
 });
@@ -32,7 +32,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), async(req,res
   if (topic) {
     res.json(topic.parsedData())
   } else {
-    res.status(404).json({Error: "Topic Not found"})
+    res.status(404).json([{Error: "Topic Not found"}])
   }
 })
 
@@ -79,7 +79,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), async (r
     });
     res.json({id: req.params.id});
   } catch (Error) {
-    res.status(422).json(Error.errors)
+    res.status(422).json([{ Error: "An unknown Error has occured."}])
   }
 
 });

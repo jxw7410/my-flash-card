@@ -1,10 +1,16 @@
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
-
-export const openModal = modal => ({
+/*
+  modal is an object as follows: 
+  {
+    type:, 
+    ...otherProps
+  }
+*/ 
+export const openModal = modalData => ({
   type: OPEN_MODAL,
-  modal
+  modalData
 })
 
 export const closeModal = () => ({

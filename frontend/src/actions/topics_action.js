@@ -35,7 +35,7 @@ export const fetchTopic = topicId => dispatch => {
   return TopicsApi.fetchTopic(topicId).then(
     topic => {
       dispatch(receiveTopic(topic.data));
-      return Promise.resolve();
+      return Promise.reject();
     },
     err => {
       dispatch(receiveTopicErrors(err.response.data));

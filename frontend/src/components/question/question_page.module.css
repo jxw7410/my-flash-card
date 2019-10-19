@@ -5,21 +5,23 @@
   font-family: sans-serif;
 }
 
-.sideNavCtn{
+.questionPageCtn > section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.sideNavCtn{
   position: relative;
 }
 
 
 .sideNav{
-  position: absolute;
-  width: 90%;
-  min-height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  width: 90%;
+  min-height: 90%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px grey;
@@ -36,14 +38,18 @@
   100% {left: auto}
 }
 
-.sideNav> * {
-  width: 100%;
-}
-
-.sideNavSec1{
+.sideNav > section {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+}
+
+.sideNav > section:not(:first-child) {
+  border-bottom: 1px solid lightgray;
+}
+
+.sideNavSec1{
   height: 60px;
   background:  rgb(52, 77, 165);
   color: white;
@@ -53,15 +59,28 @@
 .sideNavSec2{
   background: white;
   color: black;
-  border-bottom: 1px solid lightgray;
 }
 
-.sideNavSec3{
-  height: 200px;
+
+.createQuestionBtn{
+  height: 40px;
+  width: 200px;
+  margin: 10px;
+  border: 2px solid green;
+  background: green;
   font-size: 20px;
+  color: white;
+  border-radius: 10px;
+  transition: background 0.2s linear, color 0.2s linear;
 }
 
-.sideNavSec3 > div {
-  margin: 20px auto;
-  width: 90%;
+
+.createQuestionBtn:hover{
+  cursor: pointer;
+  background: white;
+  color: green;
+}
+
+.createQuestionBtn:active, .createQuestionBtn:focus{
+  outline: none;
 }

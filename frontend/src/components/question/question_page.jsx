@@ -1,17 +1,36 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Styles from './question_page.module.css';
 
 
 const QuestionPage = props => {
-  useEffect(()=>{
-    if (!props.topic.topicId) {
-      props.fetchTopic(props.match.params.topicId);
-    } else {
-      // 
-      console.log('to_do')
+  useEffect(() => {
+    async function fetchData() {
+      if (!props.topic.topicId) {
+        try { await props.fetchTopic(props.match.params.topicId) } 
+        catch (err) { console.log('fetching failed?') }
+        await props.fetchQuestions(props.match.params.topicId);
+      } else {
+        await props.fetchQuestions(props.match.params.topicId);
+      }
     }
+    fetchData();
   }, [])
 
+
+  const openModal = e => {
+    e.preventDefault();
+    props.openModal({
+      type: 'CREATE_QUESTION',
+      topicId: props.match.params.topicId
+    });
+  }
+ 
+
+  const questions = Object.keys(props.questions).map(questionId => {
+    return (
+      <li key={questionId}>{props.questions[questionId].question}</li>
+    )
+  })
 
   return (
     <div className={Styles.questionPageCtn}>
@@ -23,12 +42,33 @@ const QuestionPage = props => {
           <section className={`${Styles.sideNavSec1} ${Styles.sideNavSec2}`}>
             {props.topic.name}
           </section>
+          <section>
+            <button 
+              className={Styles.createQuestionBtn}
+              onClick={openModal}
+              type='button'>Add Question</button>
+          </section>
         </div>
       </section>
-      <section>
-
+      <section style={{ flexDirection: "column" }}>
+        { questions.length ? questions : filler() }
       </section>
     </div>
+  )
+}
+
+
+function filler() {
+  return (
+    <>
+      <span style={{ fontSize: '24px' }}>
+        Looks like you don't have any Questions for this Topic.
+      </span>
+      <br />
+      <span style={{ fontSize: '24px' }}>
+        Press the Add Question button to make a new question.
+      </span>
+    </>
   )
 }
 

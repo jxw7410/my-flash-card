@@ -55,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Class Methods
 
+  // For JSON rendering
   Topic.prototype.parsedData = function(){
     return {
       [this.id] : {
