@@ -2,8 +2,6 @@ import React from 'react';
 import Styles from './modal.module.css';
 
 const DeleteTopicModal = props => {
-
-
   const deleteTopic = e => {
     e.preventDefault();
     const data = {

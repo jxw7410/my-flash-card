@@ -1,22 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './question_page.module.css';
-
+import QuestionCard from '../card/question_card';
 
 const QuestionPage = props => {
+  const [state, setState] = useState({
+    sideNavAnimated: false,
+  })
+
   useEffect(() => {
     async function fetchData() {
       if (!props.topic.topicId) {
         try { await props.fetchTopic(props.match.params.topicId) } 
         catch (err) { console.log('fetching failed?') }
-        await props.fetchQuestions(props.match.params.topicId);
+        fetchQuestions();
       } else {
-        await props.fetchQuestions(props.match.params.topicId);
+        fetchQuestions();
       }
     }
     fetchData();
   }, [])
 
 
+  const fetchQuestions = async () => {
+    try { await props.fetchQuestions(props.match.params.topicId);}  
+    catch { props.clearQuestions();}
+  }
+  
   const openModal = e => {
     e.preventDefault();
     props.openModal({
@@ -28,14 +37,17 @@ const QuestionPage = props => {
 
   const questions = Object.keys(props.questions).map(questionId => {
     return (
-      <li key={questionId}>{props.questions[questionId].question}</li>
+      // <li key={questionId}>{props.questions[questionId].question}</li>
+      <QuestionCard key={questionId} card={props.questions[questionId]} />
     )
   })
 
   return (
     <div className={Styles.questionPageCtn}>
       <section className={Styles.sideNavCtn}>
-        <div className={Styles.sideNav}>
+        <div 
+          onAnimationEnd={ e => setState({...state, sideNavAnimated: true})}
+          className={`${Styles.sideNav} ${ state.sideNavAnimated ? "" : Styles.sideNavAnimate}`}>
           <section className={Styles.sideNavSec1}>
             {props.topic.type}
           </section>
@@ -50,8 +62,13 @@ const QuestionPage = props => {
           </section>
         </div>
       </section>
-      <section style={{ flexDirection: "column" }}>
-        { questions.length ? questions : filler() }
+      <section >
+        { 
+          questions.length ? 
+            <ul className={Styles.cardList}>
+              {questions}
+            </ul> : filler() 
+        }
       </section>
     </div>
   )

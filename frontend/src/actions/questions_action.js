@@ -4,6 +4,7 @@ export const RECEIVE_QUESTION = 'RECEIVE_QUESTION';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const RECEIVE_QUESTIONS_ERRORS = 'RECEIVE_QUESTIONS_ERRORS';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
+export const DELETE_ALL_QUESTIONS = 'DELETE_ALL_QUESTIONS';
 export const CLEAR_QUESTIONS_ERRORS = 'CLEAR_QUESTIONS_ERRORS';
 
 
@@ -34,6 +35,9 @@ export const clearQuestionErrors = () => ({
   type: CLEAR_QUESTIONS_ERRORS
 })
 
+export const clearQuestions = () =>({
+  type: DELETE_ALL_QUESTIONS
+})
 
 export const fetchQuestions = topicId => dispatch => {
   return QuestionApi.fetchQuestions(topicId)

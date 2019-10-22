@@ -25,6 +25,9 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px grey;
+}
+
+.sideNavAnimate{
   -webkit-animation: rushIn  .8s  ease-out forwards;
   animation: rushIn  .8s  ease-out forwards;
 }
@@ -83,4 +86,14 @@
 
 .createQuestionBtn:active, .createQuestionBtn:focus{
   outline: none;
+}
+
+.cardList{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardList > * {
+  margin: 0 20px;
 }
