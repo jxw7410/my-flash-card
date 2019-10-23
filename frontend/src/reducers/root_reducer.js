@@ -8,7 +8,7 @@ import questionReducer from './questions_reducer';
 export default combineReducers({
   // Remove this later, because 
   session: sessionReducer,
-  questions: questionReducer,
+  questionsReducer: questionReducer,
   topics: topicReducer,
   errors: errorReducer,
   ui: uiReducer

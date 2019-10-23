@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Styles from './modal.module.css'
+import DescriptionBox from '../shared/desciption_box';
 
 const CreateQuestionModal = props => {
   const [state, setState] = useState({
@@ -35,7 +36,8 @@ const CreateQuestionModal = props => {
       answer: state.answer
     }
 
-    props.createQuestion(data);
+    props.createQuestion(data)
+      .then( () => props.closeModal());
   }
 
   return (
@@ -47,8 +49,18 @@ const CreateQuestionModal = props => {
       <form
         onSubmit={handleSubmit}
         className={Styles.newTopicForm}>
-        <textarea onChange={textChange('question')} value={state.question} />
-        <textarea onChange={textChange('answer')} value={state.answer} />
+        <br />
+        <DescriptionBox 
+          onChange={textChange('question')} 
+          value={state.question}
+          label="Question" 
+          maxLength="315" />
+        <br />
+        <DescriptionBox 
+          onChange={textChange('answer')} 
+          value={state.answer} 
+          label="Answer"
+          maxLength="315" />
         <button
           className={Styles.createBtn}
           type='submit'>{state.isEdit ? "Edit" : "Create"}

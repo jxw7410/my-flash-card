@@ -9,6 +9,6 @@ export const createQuestion = data => (
   axios.post(`api/topics/${data.topicId}/questions`, data)
 )
 
-export const getQuestionCount = topicId => (
+export const getQuestionsCount = topicId => (
   axios.get(`api/topics/${topicId}/questions/count`)
 )

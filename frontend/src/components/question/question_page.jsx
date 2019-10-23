@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import Styles from './question_page.module.css';
 import QuestionCard from '../card/question_card';
-import {getQuestionCount} from '../../utils/questions_api';
+
 
 const QuestionPage = props => {
   const [state, setState] = useState({
@@ -10,36 +10,34 @@ const QuestionPage = props => {
     sideNavAnimated: false,
   })
 
-  const [reducedState, dispatch] = useReducer( localReducer, { count: 0});
-
-  const fetchQuestionCount = () => {
-    return getQuestionCount(props.match.params.topicId)
-      .then(res => {
-        dispatch({ type: 'RECEIVE_COUNT', count: res.data.count })
-        return Promise.resolve();
-      });
-  }
 
   /* 
     Reason why fetchTopic is awaited is because I don't want to 
     for any reason try to fetchQuestions unless I know for sure I have a topicId 
     that exists.
    */
+
+   const navBarUi = useRef();
+
   useEffect(() => {
     async function fetchData() {
       if (!props.topic.topicId) {
         try { await props.fetchTopic(props.match.params.topicId) } 
         catch (err) { console.log('fetching failed?') }
         fetchQuestions();
-        fetchQuestionCount();
+        props.getQuestionsCount(props.match.params.topicId);
       } else {
         fetchQuestions();
-        fetchQuestionCount();
+        props.getQuestionsCount(props.match.params.topicId);
       }
     }
     fetchData();
   }, [])
 
+  useEffect( () => {
+      document.addEventListener('keydown', keyPressEventHandler);
+      return () => document.removeEventListener('keydown', keyPressEventHandler);
+  }, [keyPressEventHandler]); 
 
   const fetchQuestions = async () => {
     try { await props.fetchQuestions(props.match.params.topicId);}  
@@ -51,7 +49,7 @@ const QuestionPage = props => {
     props.openModal({
       type: 'CREATE_QUESTION',
       topicId: props.match.params.topicId
-    });
+    })
   }
   
   const shiftPos = direction => e => {
@@ -60,11 +58,21 @@ const QuestionPage = props => {
       const leftPos = state.leftPos + 540;
       const cardNum = state.cardNum - 1;
       setState({...state, leftPos, cardNum});
-    } else if (direction === 'RIGHT' && state.cardNum !== reducedState.count) {
+    } else if (direction === 'RIGHT' && state.cardNum !== props.questionsCount) {
       const leftPos = state.leftPos - 540;
       const cardNum = state.cardNum + 1;
       setState({ ...state, leftPos,  cardNum});
     }
+  }
+
+
+  function keyPressEventHandler(e){
+    const { key, keyCode } = e;
+    if (keyCode === 37 || key === 'arrowLeft' ){
+      shiftPos('LEFT')(e);
+    } else if (keyCode === 39 || key === 'arrowRight') {
+      shiftPos('RIGHT')(e);
+    } 
   }
 
   const questions = Object.keys(props.questions).map(questionId => 
@@ -98,7 +106,7 @@ const QuestionPage = props => {
               <div className={Styles.cardNav}>
                 <i onClick={shiftPos('LEFT')} className={`fas fa-arrow-circle-left ${Styles.cardNavArrows}`} />
                 <section style={{fontSize: '24px'}}>
-                  {`${state.cardNum} / ${reducedState.count}`}
+                  {`${state.cardNum} / ${props.questionsCount}`}
                 </section>
                 <i onClick={shiftPos('RIGHT')} className={`fas fa-arrow-circle-right ${Styles.cardNavArrows}`} />
               </div>
@@ -113,21 +121,6 @@ const QuestionPage = props => {
       </section>
     </div>
   )
-}
-
-
-function localReducer(state, action){
-    Object.freeze(state); 
-    switch(action.type){
-      case 'RECEIVE_COUNT':
-        return { count: action.count}
-      case 'INCREMENT_COUNT':
-        return { count: state.count + 1}
-      case 'DECREMENT_COUNT':
-        return { count: state.count - 1}
-      default:
-        return state;
-    }
 }
 
 

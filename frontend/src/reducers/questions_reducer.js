@@ -2,32 +2,36 @@ import {
   RECEIVE_QUESTION, 
   RECEIVE_QUESTIONS, 
   DELETE_QUESTION,
-  DELETE_ALL_QUESTIONS
+  DELETE_ALL_QUESTIONS,
+  RECEIVE_COUNT
 } from '../actions/questions_action';
 
-/*
-  state of question would be:
-  { 
-    id : {
-      id,
-      question,
-      answer,
-    }
-  }
-*/
-const questionReducer = (state={}, action) => {
+
+const initialState = ({
+  count: 0,
+  questions: {}
+})
+
+const questionReducer = (state = initialState, action) => {
   Object.freeze(state);
+  let newState = Object.assign({}, state);
   switch(action.type) {
     case RECEIVE_QUESTION:
-      return Object.assign({}, state, action.question);
+      newState.questions = Object.assign({}, newState.questions, action.question);
+      newState.count += 1;
+      return newState;
     case RECEIVE_QUESTIONS:
-      return action.questions;
+      newState.questions = action.questions;
+      return newState;
     case DELETE_QUESTION:
-      const newState = Object.assign({}, state);
-      delete newState[action.questionId]
+      delete newState.questions[action.questionId]
+      newState.count -= 1;
+      return newState;
+    case RECEIVE_COUNT:
+      newState.count = action.count;
       return newState;
     case DELETE_ALL_QUESTIONS:
-      return {};
+      return initialState;
     default: 
       return state;
   }

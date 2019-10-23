@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "Question: Question cannot be empty."
+        },
+        len: {
+          args: [1, 315],
+          msg: 'Question: There is a max of 315 characters'
         }
       }
     },
@@ -20,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Answer: Answer cannot be empty.'
+        },
+        len: {
+          args: [1, 315],
+          msg: 'Question: There is a max of 315 characters'
         }
       }
     }

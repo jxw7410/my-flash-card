@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import QuestionPage from './question_page';
 import { fetchTopic } from '../../actions/topics_action';
-import { fetchQuestions, clearQuestions } from '../../actions/questions_action';
-import { openModal } from '../../actions/modal_action';
+import { fetchQuestions, clearQuestions, getQuestionsCount } from '../../actions/questions_action';
+import { openModal, closeModal } from '../../actions/modal_action';
 
 
 const msp = (state, props) => {
@@ -10,7 +10,8 @@ const msp = (state, props) => {
   const topic = state.topics[props.match.params.topicId] || {};
   return {
     topic,
-    questions: state.questions,
+    questions: state.questionsReducer.questions,
+    questionsCount: state.questionsReducer.count,
   }
 }
 
@@ -18,6 +19,7 @@ const msp = (state, props) => {
 const mdp = dispatch => ({
   fetchTopic: topicId => dispatch(fetchTopic(topicId)),
   fetchQuestions: topicId => dispatch(fetchQuestions(topicId)),
+  getQuestionsCount: topicId =>  dispatch(getQuestionsCount(topicId)),
   openModal: modalData => dispatch(openModal(modalData)),
   clearQuestions: () => dispatch(clearQuestions())
 })

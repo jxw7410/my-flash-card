@@ -3,6 +3,7 @@ import * as QuestionApi from '../utils/questions_api';
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const RECEIVE_QUESTIONS_ERRORS = 'RECEIVE_QUESTIONS_ERRORS';
+export const RECEIVE_COUNT = 'RECEIVE_COUNT';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const DELETE_ALL_QUESTIONS = 'DELETE_ALL_QUESTIONS';
 export const CLEAR_QUESTIONS_ERRORS = 'CLEAR_QUESTIONS_ERRORS';
@@ -25,6 +26,10 @@ const receiveErrors = errors => ({
   errors
 })
 
+const receiveCount = count => ({
+  type: RECEIVE_COUNT,
+  count
+})
 
 export const deleteQuestion = questionId => ({
   TYPE: DELETE_QUESTION,
@@ -62,3 +67,10 @@ export const createQuestion = data => dispatch => {
     })
 }
 
+export const getQuestionsCount = topicId =>  dispatch =>{ 
+  return QuestionApi.getQuestionsCount(topicId)
+    .then( res => {
+      dispatch(receiveCount(res.data.count));
+      return Promise.resolve();
+    })
+}
