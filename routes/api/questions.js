@@ -23,6 +23,17 @@ router.get('/', passport.authenticate('jwt', {session: false}), async (req, res)
 });
 
 
+router.get('/count', passport.authenticate('jwt', {session: false}), async (req, res) => {
+  const count = await Question.count({
+    where: {
+      topicId: req.params.topicId
+    }
+  })
+
+  res.json({ count });
+});
+
+
 
 //Post 
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {

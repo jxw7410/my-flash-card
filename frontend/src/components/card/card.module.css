@@ -21,6 +21,7 @@
   display: grid;
   grid-template-rows: 60px auto;
   font-size: 24px;
+  background: white;
 }
 
 

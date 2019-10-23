@@ -88,12 +88,42 @@
   outline: none;
 }
 
+
+.cardListCtn{
+  height: 320px;
+  width: 540px;
+  overflow: hidden;
+  position: relative;
+}
+
 .cardList{
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: left 0.5s ease-out;
 }
 
 .cardList > * {
   margin: 0 20px;
+} 
+
+.cardNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 80%;
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px grey;
+}
+
+.cardNavArrows{
+  font-size: 60px;
+  margin: 0 20px;
+}
+
+.cardNavArrows:hover{
+  cursor: pointer;
 }
