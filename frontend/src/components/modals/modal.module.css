@@ -1,12 +1,17 @@
+.modalBackground, .newTopicHdr, .newTopicForm,
+.deleteModalInfo, .delModalBtnCtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .modalBackground{
   position: fixed;
   z-index: 1000;
   height: 100vh;
   width: 100vw;
   background: rgba(50, 50, 50, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 
@@ -30,15 +35,9 @@
   font-family: sans-serif;
   font-size: 24px;
   background: rgb(52, 77, 165);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .newTopicForm{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   padding: 20px 0;
 }
@@ -75,10 +74,8 @@
 }
 
 .deleteModalInfo{
-  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   width: 100%;
 }
 
@@ -88,9 +85,7 @@
 }
 
 .delModalBtnCtn{
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 }
 

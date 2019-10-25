@@ -48,7 +48,9 @@
   width: 100%;
 }
 
-.loggedInLinks, .loggedInLinks > * {
+.loggedInLinks, .loggedInLinks > * , 
+.iconCtn, .userDropdown > ul,
+.userDropdown > ul > li:first-child > section{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,9 +69,6 @@
 }
 
 .iconCtn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: rgb(52, 77, 165);
   border: 1px solid rgb(52, 77, 165);
   height: 40px;
@@ -104,10 +103,7 @@
 
 
 .userDropdown > ul {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 10px;
 }
 
@@ -120,13 +116,6 @@
   display: grid;
   grid-template-columns: 75px auto;
 }
-
-.userDropdown > ul > li:first-child > section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 
 .logoutBtn{
   margin: 0 10px;

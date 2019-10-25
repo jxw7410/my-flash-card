@@ -5,20 +5,20 @@
   font-family: sans-serif;
 }
 
-.questionPageCtn > section {
+.questionPageCtn > section, .sideNav,
+.sideNav > section , .cardList, .cardNav {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .sideNavCtn{
   position: relative;
 }
 
-
 .sideNav{
-  display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
   position: absolute;
   width: 90%;
   min-height: 90%;
@@ -42,9 +42,6 @@
 }
 
 .sideNav > section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
@@ -98,9 +95,6 @@
 
 .cardList{
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: left 0.5s ease-out;
 }
 
@@ -109,9 +103,7 @@
 } 
 
 .cardNav{
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 50px;
   width: 80%;
   height: 100px;

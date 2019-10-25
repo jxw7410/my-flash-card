@@ -20,38 +20,35 @@ const DemoCard = props => {
   // Check is componented is mounted in order to prevent setState of an unmounted component
   let isMounted = useRef(false);
 
-  // ComponentDidUpdate.
-  useEffect(() => {
-    if (isMounted.current) {
-      rotate(3000);
-    }
-  });
+  const rotate = React.useCallback(
+    timeout => {
+      return setTimeout(() => {
+        let rotateDeg = state.rotateDeg;
+        rotateDeg += (rotateDeg === 0 ? 180 : -180);
+        if (isMounted.current) {
+          if (rotateDeg === 180) {
+            const randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
+            setState({ randomWord, rotateDeg });
+          } else {
+            setState({ ...state, rotateDeg })
+          }
+        }
+      }, timeout)
+    }, [listOfWords, state])
 
-  // ComponentDidMount, and ComponentWillUnmount equivalent.
+
+  // functions like ComponentDidUpdate, order matters here
+  useEffect(() => {
+    if (isMounted.current) rotate(3000);
+  }, [rotate]);
+
+  // functions like ComponentDidMount, and ComponentWillUnmount 
   // We need isMounted to makesure setState does not trigger when timeout happens.
   useEffect(() => {
     isMounted.current = true;
-    rotate(1500);
-    return () => {
-      isMounted.current = false;
-    }
+    rotate(2000);
+    return () => isMounted.current = false;
   }, [])
-
-
-  const rotate = timeout => {
-    return setTimeout( () => {
-      let rotateDeg = state.rotateDeg;
-      rotateDeg += ( rotateDeg === 0 ? 180 : -180);
-      if (isMounted.current) {
-        if (rotateDeg === 180){
-          const randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
-          setState({ randomWord, rotateDeg});
-        } else {
-          setState({...state, rotateDeg})
-        } 
-      }
-    }, timeout)
-  }
 
   // styles
   const cardContainerStyle = {

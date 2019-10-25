@@ -1,3 +1,12 @@
+.cardContent, .topicCardCtn, 
+.topicCardName, .topicCardHdr, .topicCard,
+.topicCardOptions, .topicCardDescHdr, .topicCardDesc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .cardCtn{
   position: relative;
   perspective: 1000px;
@@ -50,16 +59,11 @@
   align-items: center;
 }
 
-.cardContent{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .cardContent > span {
   width: fit-content;
-  max-width: 80%;
+  max-width: 90%;
   margin: 0 auto;
+  text-align: justify;
 }
 
 .topicCardCtn{
@@ -67,14 +71,10 @@
   width: 250px;
   height: 250px;
   margin: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .topicCard{
-  display: flex;
-  align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   position: absolute;
   width: 250px;
@@ -97,9 +97,6 @@
 
 .topicCardOptions{
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   right: 7px;
   top: 14px;
 }
@@ -147,9 +144,6 @@
 }
 
 .topicCardHdr{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 75px;
   font-size: 24px;
   color: white;
@@ -165,9 +159,6 @@
 }
 
 .topicCardName{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 250px;
   width: 100%;
   font-size: 25px;
@@ -177,8 +168,7 @@
 
 .topicCardDesc{
   position: absolute;
-  display: flex;
-  align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   background: linear-gradient(rgb(173, 168, 168), white);
   width: 100%;
@@ -190,9 +180,6 @@
 }
 
 .topicCardDescHdr{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 30px;
   font-size: 24px;
   width: 100%;
