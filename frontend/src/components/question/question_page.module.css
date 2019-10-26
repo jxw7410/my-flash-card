@@ -6,7 +6,7 @@
 }
 
 .questionPageCtn > section, .sideNav,
-.sideNav > section , .cardList, .cardNav {
+.sideNav > section , .cardList, .cardNav, .navCenter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,8 +114,14 @@
 .cardNavArrows{
   font-size: 60px;
   margin: 0 20px;
+  color: rgb(52, 77, 165);
 }
 
 .cardNavArrows:hover{
   cursor: pointer;
+}
+
+.navCenter{
+  font-size: 24px;
+  flex-direction: column;
 }

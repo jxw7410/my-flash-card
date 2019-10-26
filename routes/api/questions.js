@@ -5,7 +5,7 @@ const passport = require('passport');
 const { Question } = require('../../models/sequelize');
 const { errorsParser } = require('../../utils/helper_methods');
 
-// Get 
+// Index
 router.get('/', passport.authenticate('jwt', {session: false}), async (req, res) => {
   const questions = await Question.findAll({
     where: {
@@ -22,7 +22,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), async (req, res)
   }
 });
 
-
+// Get Count
 router.get('/count', passport.authenticate('jwt', {session: false}), async (req, res) => {
   const count = await Question.count({
     where: {
@@ -48,6 +48,37 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
     res.json(newQuestion.parseData());
   } catch(ValidationError) {
     res.status(422).json(errorsParser(ValidationError));
+  }
+});
+
+
+// Edit
+router.put('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const question = await Question.findByPk(req.params.id);
+  try {
+    await question.update({
+      question: req.body.question,
+      answer:  req.body.answer
+    });
+
+    res.json(question.parseData());
+  } catch (ValidationError){
+    res.status(422).json(errorsParser(ValidationError));
+  }
+});
+
+// Delete 
+router.delete('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    await Question.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.json({questionId: req.params.id});
+  } catch (Error) {
+    res.status(422).json([{ Error: "An unknown Error has occured." }])
   }
 });
 

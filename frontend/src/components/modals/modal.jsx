@@ -6,9 +6,7 @@ import DeleteTopicModal from './delete_topic_modal_container';
 
 
 const Modal = ({modalData, closeModal}) => {
-  if (!modalData){
-    return null;
-  }
+  if (!modalData) return null;
 
   let component;
   switch(modalData.type) {
@@ -19,10 +17,17 @@ const Modal = ({modalData, closeModal}) => {
       component = <TopicModal topic={modalData.topic}/>
       break;
     case 'DELETE_TOPIC':
-      component = <DeleteTopicModal topic={modalData.topic} />
+      component = <DeleteTopicModal deleteCallBack={modalData.deleteCallBack} />
       break;
     case 'CREATE_QUESTION':
+      // TopicId isn't falsely written question has a relationship to topic.
       component = <QuestionModal topicId={modalData.topicId} />
+      break;
+    case 'EDIT_QUESTION':
+      component = <QuestionModal question={modalData.question} />
+      break;
+    case 'DELETE_QUESTION':
+      component = <DeleteTopicModal deleteCallBack={modalData.deleteCallBack} />;
       break;
     default:
       return null

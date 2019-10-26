@@ -8,16 +8,8 @@ const QuestionPage = props => {
     leftPos: 0,
     cardNum: 1,
     sideNavAnimated: false,
-  })
+  });
 
-
-  /* 
-    Reason why fetchTopic is awaited is because I don't want to 
-    for any reason try to fetchQuestions unless I know for sure I have a topicId 
-    that exists.
-   */
-
-   const navBarUi = useRef();
 
   useEffect(() => {
     async function fetchData() {
@@ -44,16 +36,50 @@ const QuestionPage = props => {
     catch { props.clearQuestions();}
   }
   
-  const openModal = e => {
+  const createQuestionModal = e => {
     e.preventDefault();
     props.openModal({
       type: 'CREATE_QUESTION',
       topicId: props.match.params.topicId
     })
   }
+
+  const editQuestionModal = e => {
+    e.preventDefault();
+    const question = questions[state.cardNum - 1];
+    props.openModal({
+      type: 'EDIT_QUESTION',
+      question: {
+        topicId: props.match.params.topicId,
+        questionId: question.questionId,
+        question: question.question,
+        answer: question.answer
+      }
+    });
+  }
+
+  const deleteQuestion = e => {
+    e.preventDefault();
+
+    const questionKeys = Object.keys(props.questions);
+    const questionId = questionKeys[state.cardNum - 1 ];
+
+    const deleteQuestionCallBack = async () => {
+      await props.deleteQuestion({
+        topicId: props.match.params.topicId,
+        questionId
+      });
+    
+      if ( questionKeys.length === state.cardNum) shiftPos('LEFT')();
+    }
+
+    props.openModal({
+      type: 'DELETE_QUESTION',
+      deleteCallBack: deleteQuestionCallBack
+    });
+  }
   
   const shiftPos = direction => e => {
-    e.preventDefault();
     if (direction === 'LEFT' && state.cardNum !== 1){
       const leftPos = state.leftPos + 540;
       const cardNum = state.cardNum - 1;
@@ -75,15 +101,16 @@ const QuestionPage = props => {
     } 
   }
 
-  const questions = Object.keys(props.questions).map(questionId => 
-      <QuestionCard key={questionId} card={props.questions[questionId]} />
-    );
+
+  const questions = Object.keys(props.questions).map(questionId =>
+    <QuestionCard key={questionId} card={props.questions[questionId]} />
+  );
 
   return (
     <div className={Styles.questionPageCtn}>
       <section className={Styles.sideNavCtn}>
         <div 
-          onAnimationEnd={ e => setState({...state, sideNavAnimated: true})}
+          onAnimationEnd={ () => setState({...state, sideNavAnimated: true})}
           className={`${Styles.sideNav} ${ state.sideNavAnimated ? "" : Styles.sideNavAnimate}`}>
           <section className={Styles.sideNavSec1}>
             {props.topic.type}
@@ -94,7 +121,7 @@ const QuestionPage = props => {
           <section>
             <button 
               className={Styles.createQuestionBtn}
-              onClick={openModal}
+              onClick={createQuestionModal}
               type='button'>Add Question</button>
           </section>
         </div>
@@ -105,8 +132,12 @@ const QuestionPage = props => {
             <>
               <div className={Styles.cardNav}>
                 <i onClick={shiftPos('LEFT')} className={`fas fa-arrow-circle-left ${Styles.cardNavArrows}`} />
-                <section style={{fontSize: '24px'}}>
+                <section className={Styles.navCenter}>
                   {`${state.cardNum} / ${props.questionsCount}`}
+                  <div>
+                    <button onClick={editQuestionModal} type='button'>Edit</button>
+                    <button onClick={deleteQuestion} type='button'>Delete</button>
+                  </div>
                 </section>
                 <i onClick={shiftPos('RIGHT')} className={`fas fa-arrow-circle-right ${Styles.cardNavArrows}`} />
               </div>

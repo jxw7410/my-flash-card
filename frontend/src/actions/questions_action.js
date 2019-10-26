@@ -31,8 +31,8 @@ const receiveCount = count => ({
   count
 })
 
-export const deleteQuestion = questionId => ({
-  TYPE: DELETE_QUESTION,
+const deleteQuestionAction = questionId => ({
+  type: DELETE_QUESTION,
   questionId
 })
 
@@ -67,10 +67,33 @@ export const createQuestion = data => dispatch => {
     })
 }
 
-export const getQuestionsCount = topicId =>  dispatch =>{ 
+
+export const editQuestion = data => dispatch => {
+  return QuestionApi.editQuestion(data).then( res => {
+    dispatch(receiveQuestion(res.data));
+    return Promise.resolve();
+  },
+  err => {
+    dispatch(receiveErrors(err.response.data));
+    return Promise.reject();
+  });
+}
+
+export const deleteQuestion = data => dispatch => {
+  return QuestionApi.deleteQuestion(data).then( res => {
+      dispatch(deleteQuestionAction(res.data.questionId)); 
+      return Promise.resolve();
+    }, 
+    err => {
+      dispatch(receiveErrors(err.response.data));
+      return Promise.reject();
+    });
+}
+
+export const getQuestionsCount = topicId => dispatch => {
   return QuestionApi.getQuestionsCount(topicId)
-    .then( res => {
+    .then(res => {
       dispatch(receiveCount(res.data.count));
       return Promise.resolve();
-    })
+    });
 }

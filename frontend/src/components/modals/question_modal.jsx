@@ -4,8 +4,9 @@ import DescriptionBox from '../shared/desciption_box';
 
 const CreateQuestionModal = props => {
   const [state, setState] = useState({
-    question: "",
-    answer: "",
+    question: props.question ? props.question.question : "",
+    answer: props.question ? props.question.answer : "",
+    isEdit: props.question ? true : false,
     isMounted: false
   })
 
@@ -28,16 +29,24 @@ const CreateQuestionModal = props => {
     }
   }
 
-  const handleSubmit = e => {
+  const editQuestion = e => {
     e.preventDefault();
-    const data = {
+    props.editQuestion({
+      topicId: props.question.topicId,
+      questionId: props.question.questionId,
+      question: state.question,
+      answer: state.answer
+    }).then(() => props.closeModal())
+  }
+
+  const createQuestion = e => {
+    e.preventDefault();
+
+    props.createQuestion({
       topicId: props.topicId,
       question: state.question,
       answer: state.answer
-    }
-
-    props.createQuestion(data)
-      .then( () => props.closeModal());
+    }).then( () => props.closeModal());
   }
 
   return (
@@ -45,9 +54,9 @@ const CreateQuestionModal = props => {
       onClick={e => e.stopPropagation()}
       style={state.isMounted ? null : { top: '-20px', opacity: 0 }}
       className={Styles.newTopicModalCtn}>
-      <h1 className={Styles.newTopicHdr}> New Question </h1>
+      <h1 className={Styles.newTopicHdr}> { state.isEdit ? "Edit Question" : "New Question" }</h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={state.isEdit ? editQuestion : createQuestion}
         className={Styles.newTopicForm}>
         <br />
         <DescriptionBox 

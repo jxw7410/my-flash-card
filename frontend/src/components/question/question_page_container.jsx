@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import QuestionPage from './question_page';
 import { fetchTopic } from '../../actions/topics_action';
-import { fetchQuestions, clearQuestions, getQuestionsCount } from '../../actions/questions_action';
+import { fetchQuestions, clearQuestions, getQuestionsCount,  deleteQuestion} from '../../actions/questions_action';
 import { openModal } from '../../actions/modal_action';
 
 
@@ -21,6 +21,7 @@ const mdp = dispatch => ({
   fetchQuestions: topicId => dispatch(fetchQuestions(topicId)),
   getQuestionsCount: topicId =>  dispatch(getQuestionsCount(topicId)),
   openModal: modalData => dispatch(openModal(modalData)),
+  deleteQuestion: data => dispatch(deleteQuestion(data)),
   clearQuestions: () => dispatch(clearQuestions())
 })
 

@@ -18,7 +18,7 @@ const questionReducer = (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_QUESTION:
       newState.questions = Object.assign({}, newState.questions, action.question);
-      newState.count += 1;
+      newState.count = Object.keys(newState.questions).length;
       return newState;
     case RECEIVE_QUESTIONS:
       newState.questions = action.questions;

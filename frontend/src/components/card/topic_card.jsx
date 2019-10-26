@@ -30,9 +30,17 @@ const TopicCard = props => {
 
   const deleteTopic = e => {
     e.preventDefault();
+
+    const deleteTopicCallBack = event => {
+      event.preventDefault();
+      props.deleteTopic({
+        topicId: props.topic.topicId
+      })
+    }
+
     props.openModal({
       type: 'DELETE_TOPIC',
-      topic: props.topic
+      deleteCallBack: deleteTopicCallBack
     })
   }
 
