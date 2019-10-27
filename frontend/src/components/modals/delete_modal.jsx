@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './modal.module.css';
 
-const DeleteTopicModal = props => {
+const DeleteModal = props => {
 
   const cancelDelete = e => {
     props.closeModal();
@@ -27,4 +27,4 @@ const DeleteTopicModal = props => {
 }
 
 
-export default DeleteTopicModal;
+export default DeleteModal;

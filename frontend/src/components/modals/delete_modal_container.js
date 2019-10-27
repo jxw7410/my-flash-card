@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import DeleteTopicModal from './delete_topic_modal';
+import DeleteModal from './delete_modal';
 import { closeModal } from '../../actions/modal_action';
 import { deleteTopic } from '../../actions/topics_action';
 
@@ -11,4 +11,4 @@ const mdp = dispatch => ({
 })
 
 
-export default connect(null, mdp)(DeleteTopicModal)
+export default connect(null, mdp)(DeleteModal)

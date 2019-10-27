@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Styles from './modal.module.css'
 import DescriptionBox from '../shared/desciption_box';
 
-const CreateQuestionModal = props => {
+const QuestionModal = props => {
   const [state, setState] = useState({
     question: props.question ? props.question.question : "",
     answer: props.question ? props.question.answer : "",
@@ -79,4 +79,4 @@ const CreateQuestionModal = props => {
   )
 }
 
-export default CreateQuestionModal;
+export default QuestionModal;

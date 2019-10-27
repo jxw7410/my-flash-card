@@ -46,7 +46,8 @@ const QuestionPage = props => {
 
   const editQuestionModal = e => {
     e.preventDefault();
-    const question = questions[state.cardNum - 1];
+    const question = getQuestion(props.questions, state.cardNum - 1);
+
     props.openModal({
       type: 'EDIT_QUESTION',
       question: {
@@ -60,17 +61,15 @@ const QuestionPage = props => {
 
   const deleteQuestion = e => {
     e.preventDefault();
-
-    const questionKeys = Object.keys(props.questions);
-    const questionId = questionKeys[state.cardNum - 1 ];
+    const question = getQuestion(props.questions, state.cardNum - 1);
 
     const deleteQuestionCallBack = async () => {
       await props.deleteQuestion({
         topicId: props.match.params.topicId,
-        questionId
+        questionId: question.questionId
       });
     
-      if ( questionKeys.length === state.cardNum) shiftPos('LEFT')();
+      if ( state.cardNum >= props.questionsCount ) shiftPos('LEFT')();
     }
 
     props.openModal({
@@ -135,8 +134,8 @@ const QuestionPage = props => {
                 <section className={Styles.navCenter}>
                   {`${state.cardNum} / ${props.questionsCount}`}
                   <div>
-                    <button onClick={editQuestionModal} type='button'>Edit</button>
-                    <button onClick={deleteQuestion} type='button'>Delete</button>
+                    <button className={Styles.editBtn} onClick={editQuestionModal} type='button'>Edit</button>
+                    <button className={Styles.delBtn} onClick={deleteQuestion} type='button'>Delete</button>
                   </div>
                 </section>
                 <i onClick={shiftPos('RIGHT')} className={`fas fa-arrow-circle-right ${Styles.cardNavArrows}`} />
@@ -167,6 +166,15 @@ function filler() {
       </span>
     </>
   )
+}
+
+
+function getQuestion(questions, index){
+  let i = 0;
+  for(const key in questions) {
+    if( i === index) return questions[key];
+    i++;
+  }
 }
 
 export default QuestionPage;

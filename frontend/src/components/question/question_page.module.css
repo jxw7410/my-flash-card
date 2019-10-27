@@ -125,3 +125,29 @@
   font-size: 24px;
   flex-direction: column;
 }
+
+.editBtn, .delBtn{
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 5px;
+  width: 75px;
+  color: white;
+  transition: background 0.2s linear, color 0.2s linear;
+}
+
+.editBtn {
+  background: rgb(52, 77, 165);
+  border: 2px solid rgb(52, 77, 165);
+}
+
+.delBtn{
+  background: red;
+  border: 2px solid red;
+}
+
+.editBtn:hover, .delBtn:hover{
+  cursor: pointer;
+  background: white;
+  color: black;
+}
+

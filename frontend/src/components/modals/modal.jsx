@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Styles from './modal.module.css';
 import TopicModal from './topic_modal_container';
 import QuestionModal from './question_modal_container';
-import DeleteTopicModal from './delete_topic_modal_container';
+import DeleteModal from './delete_modal_container';
 
 
 const Modal = ({modalData, closeModal}) => {
@@ -17,7 +17,7 @@ const Modal = ({modalData, closeModal}) => {
       component = <TopicModal topic={modalData.topic}/>
       break;
     case 'DELETE_TOPIC':
-      component = <DeleteTopicModal deleteCallBack={modalData.deleteCallBack} />
+      component = <DeleteModal deleteCallBack={modalData.deleteCallBack} />
       break;
     case 'CREATE_QUESTION':
       // TopicId isn't falsely written question has a relationship to topic.
@@ -27,7 +27,7 @@ const Modal = ({modalData, closeModal}) => {
       component = <QuestionModal question={modalData.question} />
       break;
     case 'DELETE_QUESTION':
-      component = <DeleteTopicModal deleteCallBack={modalData.deleteCallBack} />;
+      component = <DeleteModal deleteCallBack={modalData.deleteCallBack} />;
       break;
     default:
       return null

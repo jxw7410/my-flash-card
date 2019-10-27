@@ -1,11 +1,7 @@
 import { connect } from 'react-redux';
-import CreateQuestionModal from './question_modal';
+import QuestionModal from './question_modal';
 import { closeModal } from '../../actions/modal_action';
 import { createQuestion, editQuestion } from '../../actions/questions_action';
-
-const msp = state => ({
-
-})
 
 
 const mdp = dispatch => ({
@@ -15,4 +11,4 @@ const mdp = dispatch => ({
 })
 
 
-export default connect(msp, mdp)(CreateQuestionModal);
+export default connect(null, mdp)(QuestionModal);
