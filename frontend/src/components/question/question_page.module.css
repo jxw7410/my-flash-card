@@ -133,6 +133,7 @@
   width: 75px;
   color: white;
   transition: background 0.2s linear, color 0.2s linear;
+  text-align: center;
 }
 
 .editBtn {

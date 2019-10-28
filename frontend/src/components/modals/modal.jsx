@@ -37,7 +37,7 @@ const Modal = ({modalData, closeModal}) => {
     <Fragment>
       {
         component ? 
-        <div className={ Styles.modalBackground } onClick={closeModal}> 
+        <div className={ Styles.modalBackground } onKeyPress={ e => e.stopPropagation() } onClick={closeModal}> 
             { component }
         </div> : null
       }

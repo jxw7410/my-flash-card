@@ -38,7 +38,7 @@ const QuestionCard = props => {
           <span className={Styles.cardHdr}>Answer:</span>
         </section>
         <section className={Styles.cardContent}>
-          <span>{props.card.answer}</span>
+          <span style={{fontSize: '20px'}}>{props.card.answer}</span>
         </section>
       </div>
     </div>

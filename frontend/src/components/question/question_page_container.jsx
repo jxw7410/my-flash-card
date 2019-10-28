@@ -12,6 +12,7 @@ const msp = (state, props) => {
     topic,
     questions: state.questionsReducer.questions,
     questionsCount: state.questionsReducer.count,
+    isModalOpen: Boolean(state.ui.modalData),
   }
 }
 

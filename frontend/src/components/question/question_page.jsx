@@ -92,12 +92,11 @@ const QuestionPage = props => {
 
 
   function keyPressEventHandler(e){
-    const { key, keyCode } = e;
-    if (keyCode === 37 || key === 'arrowLeft' ){
-      shiftPos('LEFT')(e);
-    } else if (keyCode === 39 || key === 'arrowRight') {
-      shiftPos('RIGHT')(e);
-    } 
+    if(!props.isModalOpen){
+      const { key, keyCode } = e;
+      if (keyCode === 37 || key === 'arrowLeft' ) shiftPos('LEFT')(e);
+      else if (keyCode === 39 || key === 'arrowRight') shiftPos('RIGHT')(e);
+    }
   }
 
 

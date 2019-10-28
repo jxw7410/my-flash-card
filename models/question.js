@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Question = sequelize.define('Question', {
     question: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notEmpty: {
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     
     answer: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notEmpty: {
