@@ -26,7 +26,7 @@
     "pm2": "^4.1.2",
     "sequelize": "^5.19.0",
     "sequelize-cli": "^5.5.1",
-    "validator": "^10.9.0"
+    "validator": "^13.7.0"
   },
   "author": "Jian Wu",
   "license": "MIT"
